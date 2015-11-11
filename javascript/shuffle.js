@@ -18,6 +18,18 @@ function shuffle(array) {
     array[m] = array[i];
     array[i] = t;
   }
-
-  console.log(array);
+  array.toString;
+  document.getElementById("deckdisplay").innerHTML = array;
+  localStorage["deck"] = JSON.stringify(array);
+}
+function pullCard(count){
+  var deck = JSON.parse(localStorage["deck"]);
+  var card = deck.pop();
+  localStorage["deck"] = JSON.stringify(deck);
+  document.getElementById("cardDisplay"+count).innerHTML = card;
+}
+count = 1;
+function draw(){
+  pullCard(count);
+  count++;
 }

@@ -1,0 +1,9 @@
+.arraydisplay{
+	width: 600px;
+	border: 1px solid #000000;
+    word-wrap: break-word;
+}
+.cardDisplay{
+	width: 60px;
+	border: 1px solid #000000;
+}
