@@ -2,27 +2,24 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="arraydisplay">
 			<p id="deckdisplay"></p>
 		</div>
-		<button onclick="load()">Shuffle</button>
-		
-		<div class="cardDisplay">
-			<p id="cardDisplay1"></p>
-		</div>
-		<div class="cardDisplay">
-			<p id="cardDisplay2"></p>
-		</div>
-		<div class="cardDisplay">
-			<p id="cardDisplay3"></p>
-		</div>
-		<div class="cardDisplay">
-			<p id="cardDisplay4"></p>
-		</div>
+		<button class="load">Shuffle</button>
+		<button class="deal">Deal</button>
+		<h2 class="displayName">Dealer</h2>
+		<ul class="dealer">
+		</ul>
+		<h2 class="displayName">Player</h2>
+		<ul class="player">
+		</ul>
 
-		<button onclick="draw()">Draw</button>
+		<br/>
+		<button class="draw">Draw</button>
+		
 		<script type="text/javascript" src="javascript/shuffle.js"></script>
 	</body>
 </html>
