@@ -1,25 +1,26 @@
+<!DOCTYPE html>
 <html>
 	<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type ="text/javascript" src ="js/shuffle.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
-		<button id="shuffle">Shuffle</button>
-		<br/>
-		<br/>
-		<div>
-		<span id="cards">6</span>
-		</div> 
-		<button id="deal">Deal</button>
-		<br/>
-		<br/>
-		<div id="card1">
+		<div class="arraydisplay">
+			<p id="deckdisplay"></p>
 		</div>
-		<div id="card2">
-		</div>
-		<div id="card3">
-		</div>
-		<div id="card4">
-		</div>
+		<button class="load">Shuffle</button>
+		<button class="deal">Deal</button>
+		<h2 class="displayName">Dealer</h2>
+		<ul class="dealer">
+		</ul>
+		<h2 class="displayName">Player</h2>
+		<ul class="player">
+		</ul>
+
+		<br/>
+		<button class="draw">Draw</button>
+		
+		<script type="text/javascript" src="js/theDeck.js"></script>
+		<script type="text/javascript" src="js/shuffle.js"></script>
 	</body>
 </html>
