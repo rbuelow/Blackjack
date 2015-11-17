@@ -74,7 +74,7 @@ function shuffle(array) {
   localStorage["deck"] = JSON.stringify(array);
 }
 
-$(".draw").click(function pullCard(){
+$(".hit").click(function pullCard(){
   var deck = JSON.parse(localStorage["deck"]);
   var card = deck.pop();
   var cardAmount;
@@ -84,29 +84,33 @@ $(".draw").click(function pullCard(){
   });
   var stringCard = cardAmount.toString();
   localStorage["deck"] = JSON.stringify(deck);
-  $(".dealer").append("<li  class=&#32;cardDisplay&#32;></li>")
+  $(".player").append("<li  class=&#32;cardDisplay&#32;></li>")
   $("li:last").append(stringCard);
 });
 
 $(".deal").click(function pullCard(){
   var deck = JSON.parse(localStorage["deck"]);
   for (var x = 0; x<2; x++){
-  var cardOne = deck.pop();
-  var cardTwo = deck.pop();
-  var cardAmount1
-  var cardAmount2
-    $.each(theDeck, function(key, value){
-	  if (key === cardOne)
-		  cardAmount1 = value 
-	  if (key === cardTwo)
-		  cardAmount2 = value
-  });
-  var stringCardOne = cardAmount1.toString();
-  var stringCardTwo = cardAmount2.toString();
-  localStorage["deck"] = JSON.stringify(deck);
-  $(".dealer").append("<li  class=&#32;cardDisplay&#32;></li>")
-  $(".dealer li:last").append(stringCardOne);
-  $(".player").append("<li  class=&#32;cardDisplay&#32;></li>")
-  $(".player li:last").append(stringCardTwo);
+      var cardOne = deck.pop();
+      var cardTwo = deck.pop();
+      var cardAmount1
+      var cardAmount2
+      $.each(theDeck, function(key, value){
+          if (key === cardOne)
+              cardAmount1 = value 
+          if (key === cardTwo)
+              cardAmount2 = value
+      });
+      var stringCardOne = cardAmount1.toString();
+      var stringCardTwo = cardAmount2.toString();
+      localStorage["deck"] = JSON.stringify(deck);
+      //if (x == 0) {
+          $(".dealer").append("<li  class=&#32;cardDisplay&#32;></li>")
+          $(".dealer li:first-child").css('font-size', 0);
+      //};
+      $(".dealer li:last").append(stringCardOne);
+      $(".player").append("<li  class=&#32;cardDisplay&#32;></li>")
+      $(".player li:last").append(stringCardTwo);
+  
 }
 });

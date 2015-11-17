@@ -21,7 +21,7 @@ html{
 	border: 1px solid #000000;
 }
 .load,
-.draw{
+.hit{
 	margin: 5rem;
 }
 ul{
@@ -30,6 +30,9 @@ ul{
 .dealer{
     margin-bottom: 5rem;
     text-decoration: none;
+}
+.dealer > li:first-child{ 
+ 
 }
 .player{
     text-decoration: none;
