@@ -1,4 +1,4 @@
-var deck = {
+var theDeck = {
 	"hA" : 1,
 	"h2" : 2,
 	"h3" : 3,

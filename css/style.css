@@ -20,8 +20,7 @@ html{
 	height: 6rem;
 	border: 1px solid #000000;
 }
-.load,
-.draw{
+.load{
 	margin: 5rem;
 }
 ul{
