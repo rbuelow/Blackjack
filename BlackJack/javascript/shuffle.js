@@ -10,8 +10,12 @@ function makePlayer() {
     return player;
 }
 
-$(".load").click(function load(){
-	shuffle(deck);
+$(".load").click(function load() {
+    var buildDeck = deck;
+    for (i = 0; i < 5; i++) {
+        buildDeck = buildDeck.concat(deck)
+    }
+    shuffle(buildDeck);
 });
 
 function shuffle(array) {
