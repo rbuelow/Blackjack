@@ -134,6 +134,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="Controllers\webControllers\WebController.cs" />
+    <Compile Include="Models\CardToValue.cs" />
     <Compile Include="Models\GlobalDeck.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

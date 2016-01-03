@@ -1,4 +1,5 @@
 ﻿using Blackjack.BLL;
+using Blackjack.Models;
 using Blackjack.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace Blackjack.Controllers
     {
         public ActionResult Index()
         {
+            CardToValue x = new CardToValue();
+            var y = x.valueHand(new List<string> { "h3", "d7" });
+            var q = 12;
             return View();
         }
 
