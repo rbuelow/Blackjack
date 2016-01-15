@@ -1,11 +1,10 @@
-
- var array =  new Array()
+function load(){
+  var array =  new Array()
   for(j=1;j<53;j++){
     array.push(j);
   }
- 
- var shuffledArray = shuffle(array);
-
+  shuffle(array);
+}
 function shuffle(array) {
   var m = array.length, t, i;
 
@@ -20,5 +19,5 @@ function shuffle(array) {
     array[i] = t;
   }
 
-  return m;
+  console.log(array);
 }
