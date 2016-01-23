@@ -1,0 +1,38 @@
+﻿@model Blackjack.Models.ViewModels.GameViewModel
+@{
+    ViewBag.Title = "Home Page";
+
+}
+@Styles.Render("~/Content/style.css")
+
+@using (Html.BeginForm("{Deal}, {HomeController}"))
+{
+    var dealerHand1 = Session["dealerCard1"];
+    var dealerHand2 = Session["dealerCard2"];
+    var playerHand1 = Session["playerCard1"];
+    var playerHand2 = Session["playerCard2"];
+
+    <h2 class="displayName">Dealer</h2>
+    <ul class="dealer"></ul>
+
+
+
+        <li class="cardDisplay" style="display: none">@dealerHand1.ToString()</li>
+        <li class="cardDisplay" style="display: none">@dealerHand2.ToString()</li>
+
+    <h2 class="displayName">Player</h2>
+    <ul class="player">
+        
+            
+        
+        <li class="cardDisplay" style="display: none">@playerHand1.ToString()</li>
+        <li class="cardDisplay" style="display: none">@playerHand2.ToString()</li>
+
+    </ul>
+}
+
+
+<br />
+<button id="hit" class="hit">Hit</button>
+<button id="shuffle" class="load">Shuffle</button>
+<button id="deal" class="deal">Deal</button>

@@ -1,0 +1,39 @@
+﻿
+html{
+	font-size: 10px;
+}
+.arraydisplay{
+	padding: 3rem;
+	margin: 5rem 0 0 5rem ;
+	font-size: 2rem;
+	width: 60rem;
+	border: 1px solid #000000;
+    word-wrap: break-word;
+}
+.cardDisplay{
+	padding: 1rem 2rem;
+	margin: 1rem 1rem 1rem 0;
+	display: inline;
+	font-size: 2rem;
+	vertical-align: middle;
+	text-align: center;
+	width: 6rem;
+	height: 6rem;
+	border: 1px solid #000000;
+}
+.load{
+	margin: 5rem;
+}
+ul{
+	list-style-type: none;
+}
+.dealer{
+    margin-bottom: 5rem;
+    text-decoration: none;
+}
+.player{
+    text-decoration: none;
+}
+.displayName{
+	margin-left: 5rem;
+}

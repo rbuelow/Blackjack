@@ -1,0 +1,63 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+html{
+	font-size: 10px;
+}
+.arraydisplay{
+	padding: 3rem;
+	margin: 5rem 0 0 5rem ;
+	font-size: 2rem;
+	width: 60rem;
+	border: 1px solid #000000;
+    word-wrap: break-word;
+}
+.cardDisplay{
+	padding: 1rem 2rem;
+	margin: 1rem 1rem 1rem 0;
+	display: inline;
+	font-size: 2rem;
+	vertical-align: middle;
+	text-align: center;
+	width: 6rem;
+	height: 6rem;
+	border: 1px solid #000000;
+}
+.load{
+	margin: 5rem;
+}
+ul{
+	list-style-type: none;
+}
+.dealer{
+    margin-bottom: 5rem;
+    text-decoration: none;
+}
+.player{
+    text-decoration: none;
+}
+.displayName{
+	margin-left: 5rem;
+}
