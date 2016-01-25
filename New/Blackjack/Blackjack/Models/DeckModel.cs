@@ -67,7 +67,7 @@ namespace Blackjack.Models
         static Random r = new Random();   
         static private List<string> Shuffle(List<string> deck)
         {
-            for (int n = 52 - 1; n >= 0; --n)
+            for (int n = deck.Count - 1; n >= 0; --n)
             {
                 int k = r.Next(n + 1);
                 string temp = deck[n];

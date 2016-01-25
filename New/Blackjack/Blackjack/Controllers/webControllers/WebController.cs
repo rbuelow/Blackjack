@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web;
 
 namespace Blackjack.Controllers.webControllers
 {
     public class WebController : ApiController
     {
         // GET api/<controller>
-        //public GameViewModel Get()
-        //{
-        //    Game game = new Game();
-        //    GameViewModel card = game.GetCard();
-        //    return card;
-        //}
+        public string Get(string[] deck)
+        {                                 
+            Game game = new Game();
+            string card = game.GetCard(deck.ToList());
+            return card;
+        }
 
         // GET api/<controller>/5
         //public void Get(int id)

@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\Game.cs" />
+    <Compile Include="BLL\JavaScriptConvert.cs" />
     <Compile Include="Controllers\webControllers\WebController.cs" />
     <Compile Include="Models\CardToValue.cs" />
     <Compile Include="Models\GlobalDeck.cs" />

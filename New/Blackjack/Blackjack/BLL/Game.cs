@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Blackjack.BLL
 {
@@ -20,15 +21,11 @@ namespace Blackjack.BLL
             return BuildDeck(deck);
         }
 
-        public string DealPlayer(List<string> gameDeck)
+        public string Deal(List<string> gameDeck)
         {     
             return GetCard(gameDeck);
         }
 
-        public string DealDealer(List<string> gameDeck)
-        {    
-            return GetCard(gameDeck);
-        }
         public List<string> BuildDeck(DeckModel buildDeck)
         {
             return buildDeck.buildTheDeck(buildDeck.deck.ToList());
@@ -39,7 +36,7 @@ namespace Blackjack.BLL
             List<string> cardDeck = deck;
             string card = "";
             if (cardDeck.Count > 0){
-                for (int i = 0; i <= 51 ; i++)
+                for (int i = 0; i < deck.Count-1 ; i++)
                     {
                         drawnCard.card = cardDeck[i];
                         cardDeck.RemoveAt(i);

@@ -19,14 +19,15 @@ namespace Blackjack.Controllers
         public ActionResult Index()
         {
             _gameDeck= _game.BuildDeck(_deck);
-            _player1.hand.Add(_game.DealPlayer(_gameDeck));
-            _dealer.hand.Add(_game.DealDealer(_gameDeck));
-            _player1.hand.Add(_game.DealPlayer(_gameDeck));
-            _dealer.hand.Add(_game.DealDealer(_gameDeck));
+            Session["deck"] = _gameDeck;
+            _player1.hand.Add(_game.Deal(_gameDeck));
+            _dealer.hand.Add(_game.Deal(_gameDeck));
+            _player1.hand.Add(_game.Deal(_gameDeck));
+            _dealer.hand.Add(_game.Deal(_gameDeck));
             Session["playerCard1"] = _player1.hand.ElementAt(0);
             Session["dealerCard1"] = _dealer.hand.ElementAt(0);
             Session["playerCard2"] = _player1.hand.ElementAt(1);
-            Session["dealerCard2"] = _dealer.hand.ElementAt(0);
+            Session["dealerCard2"] = _dealer.hand.ElementAt(1);
             return View();
         }
         
