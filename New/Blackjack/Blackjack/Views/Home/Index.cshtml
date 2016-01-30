@@ -1,26 +1,36 @@
 ﻿@using Blackjack.BLL
 @model Blackjack.Models.ViewModels.GameViewModel
 @{
-    ViewBag.Title = "Home Page";
-    var dealerHand1 = Session["dealerCard1"];
-    var dealerHand2 = Session["dealerCard2"];
-    var playerHand1 = Session["playerCard1"];
-    var playerHand2 = Session["playerCard2"];
-    var deckobj = Session["deck"];
-    var deck = @JavaScriptConvert.SerializeObject(deckobj);
+    var obj = JavaScriptConvert.SerializeObject(Model.deck.ToArray());
+    var deck = obj.Id;
 }
 @Styles.Render("~/Content/style.css")
-
-    <h2 class="displayName">Dealer</h2>
-    <ul class="dealer">
-        <li class="cardDisplay" style="display: none">@dealerHand1.ToString()</li>
-        <li class="cardDisplay" style="display: none">@dealerHand2.ToString()</li>
-    </ul>
-    <h2 class="displayName">Player</h2>
-    <ul class="player">
-        <li class="cardDisplay" style="display: none">@playerHand1.ToString()</li>
-        <li class="cardDisplay" style="display: none">@playerHand2.ToString()</li>
-    </ul>
-<br />
-<button id="hit" class="hit" data-deck="@deck">Hit</button>
-<button id="deal" class="deal">Deal</button>
+<body>
+    @foreach (var player in Model.players)
+    {
+        if (player.id == 0)
+        {
+            <h2 class="displayName">Dealer</h2>
+            <ul class="dealer">
+                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(0)</li>
+                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(1)</li>
+            </ul>
+        };
+        if (player.id == 1)
+        {
+            <h2 class="displayName">Player</h2>
+            <ul class="player">
+                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(0)</li>
+                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(1)</li>
+            </ul>
+        }
+    }
+    
+    <br />
+    <div id="hitBtn">
+        <button id="deal" class="deal">Deal</button>
+        <button id="hit" class="hit" data-deck=@deck>Hit</button>     
+    </div>  
+</body>
+    
+ 

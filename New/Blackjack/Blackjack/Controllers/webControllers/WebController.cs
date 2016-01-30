@@ -7,30 +7,26 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Blackjack.Controllers.webControllers
 {
     public class WebController : ApiController
     {
-        // GET api/<controller>
-        public string Get(string[] deck)
-        {                                 
-            Game game = new Game();
-            string card = game.GetCard(deck.ToList());
-            return card;
+        Game game = new Game();
+        // Post api/<controller>
+        [HttpPost]
+        public GameViewModel Post(GameViewModel mainDeck)
+        {                                                                                 
+            mainDeck.card = game.GetCard(mainDeck.deck);
+            return mainDeck;
         }
 
-        // GET api/<controller>/5
-        //public void Get(int id)
-        //{
-        //    Game game = new Game();
-        //    game.StartGame();
-        //}
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        //GET api/<controller>/
+        public void Get()
         {
-        }
+
+        }       
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)

@@ -132,16 +132,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BLL\CardToValue.cs" />
+    <Compile Include="BLL\Deck.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\JavaScriptConvert.cs" />
     <Compile Include="Controllers\webControllers\WebController.cs" />
-    <Compile Include="Models\CardToValue.cs" />
-    <Compile Include="Models\GlobalDeck.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeckModel.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ViewModels\GameViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,7 +155,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\javascript\logic.js" />
+    <Content Include="Scripts\javascript\logic.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\style.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
