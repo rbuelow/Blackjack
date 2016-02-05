@@ -136,8 +136,9 @@
     <Compile Include="BLL\Deck.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\JavaScriptConvert.cs" />
-    <Compile Include="Controllers\webControllers\WebController.cs" />
+    <Compile Include="Controllers\webControllers\CardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\webControllers\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,7 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="repo\" />
+    <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
