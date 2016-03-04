@@ -134,14 +134,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\CardToValue.cs" />
     <Compile Include="BLL\Deck.cs" />
-    <Compile Include="BLL\Game.cs" />
+    <Compile Include="BLL\PlayGame.cs" />
     <Compile Include="BLL\JavaScriptConvert.cs" />
     <Compile Include="Controllers\webControllers\CardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\webControllers\PlayerController.cs" />
+    <Compile Include="Controllers\webControllers\GameController.cs" />
+    <Compile Include="Controllers\webControllers\DealerController.cs" />
+    <Compile Include="Factory\PlayGameFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IPlayGame.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ViewModels\GameViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="repo\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>

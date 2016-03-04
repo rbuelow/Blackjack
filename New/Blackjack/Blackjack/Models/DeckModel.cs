@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Blackjack.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
-namespace Blackjack.BLL
+namespace Blackjack.Models
 {
-    public class Deck
+    public class DeckModel
     {
-        public string[] deck = {
+       public string[] deck = {
               "hA",
               "h2",
               "h3",
@@ -62,10 +64,10 @@ namespace Blackjack.BLL
               "sK",
         };
 
-        static Random r = new Random();
+        static Random r = new Random();   
         static private List<string> Shuffle(List<string> deck)
         {
-            for (int n = deck.Count - 1; n >= 0; --n)
+            for (int n = 52 - 1; n >= 0; --n)
             {
                 int k = r.Next(n + 1);
                 string temp = deck[n];
@@ -75,15 +77,20 @@ namespace Blackjack.BLL
             return deck;
         }
 
-        public List<string> buildTheDeck()
+        public List<string> buildTheDeck(List<string> deck)
         {
             List<string> stackDeck = new List<string>();
-            List<string> shuffeledDeck = Shuffle(deck.ToList());
-            foreach (var x in shuffeledDeck)
+            List<string> shuffeledDeck = Shuffle(deck);
+            foreach(var x in shuffeledDeck)
             {
                 stackDeck.Add(x);
             };
             return stackDeck;
         }
+
+        //public void storeDeck(Stack<string> deck)
+        //{
+        //   GlobalDeck.deck = deck;
+        //}
     }
 }

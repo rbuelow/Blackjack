@@ -68,7 +68,7 @@ namespace Blackjack.BLL
         }
         
 
-        public int valueHand(List<string> hand)
+        public int HandValue(List<string> hand)
         {
             int handValue = 0;
             foreach (var card in hand)

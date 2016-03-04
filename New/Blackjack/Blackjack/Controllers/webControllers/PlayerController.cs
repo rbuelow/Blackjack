@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using Blackjack.BLL;
-using Blackjack.Models;
+using Blackjack.Factory;
+using Blackjack.Interfaces;
 
 namespace Blackjack.Controllers.webControllers
 {
     public class PlayerController : ApiController
     {
-        CardToValue CardValue = new CardToValue();
+        IPlayGame newGame = PlayGameFactory.GetPlayGame();
 
         // Post api/<controller> 
-        public Player Post(Player player)
+        public List<string> Post(int id)
         {
-            player.handValue = CardValue.valueHand(player.hand);
-            return player;
+            return newGame.GetHand(id);
+        }
+
+        public string Get(int id)
+        {
+            return "";
         }
     }
 }

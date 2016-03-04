@@ -1,35 +1,16 @@
 ﻿@using Blackjack.BLL
 @model Blackjack.Models.ViewModels.GameViewModel
-@{
-    var obj = JavaScriptConvert.SerializeObject(Model.deck.ToArray());
-    var deck = obj.Id;
-}
+
 @Styles.Render("~/Content/style.css")
 <body>
-    @foreach (var player in Model.players)
-    {
-        if (player.id == 0)
-        {
-            <h2 class="displayName">Dealer</h2>
-            <ul class="dealer">
-                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(0)</li>
-                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(1)</li>
-            </ul>
-        };
-        if (player.id == 1)
-        {
-            <h2 class="displayName">Player</h2>
-            <ul class="player">
-                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(0)</li>
-                <li class="cardDisplay" style="display: none">@player.hand.ElementAt(1)</li>
-            </ul>
-        }
-    }
-    
-    <br />
-    <div id="hitBtn">
-        <button id="deal" class="deal">Deal</button>
-        <button id="hit" class="hit" data-deck=@deck>Hit</button>     
+    <button class="btn-default" id="start">Start game</button>
+    <div id="game" style="display: none">
+        <div id="dealerGroup"></div>
+        <div id="playerGroup"></div>
+        <br />
+        <div id="hitBtn">
+            <button id="deal" class="deal">Deal</button>
+        </div>  
     </div>  
 </body>
     

@@ -1,27 +1,28 @@
-﻿using Blackjack.BLL;
-using Blackjack.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using Blackjack.Factory;
+using Blackjack.Models;
+using Blackjack.Interfaces;
 using System.Web.Http;
+using System.Collections.Generic;
 
 namespace Blackjack.Controllers.webControllers
 {
     public class CardController : ApiController
     {
-        Game game = new Game();
-        
+        IPlayGame newGame = PlayGameFactory.GetPlayGame();
+
         // Post api/<controller>
         [HttpPost]
-        public GameViewModel Post(GameViewModel mainDeck)
-        {                                                                                 
-            mainDeck.card = game.GetCard(mainDeck.deck);
-            return mainDeck;
+        public string Post(int id)
+        {          
+            return newGame.Hit(id);
         }
 
         //GET api/<controller>/
-              
+
+        public List<int> Get()
+        {            
+            return newGame.GetPlayerIds();
+        }
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
