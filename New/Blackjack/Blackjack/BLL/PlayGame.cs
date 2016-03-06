@@ -85,8 +85,10 @@ namespace Blackjack.BLL
 
         public string Hit(int playerId)
         {
-            _newGame.players[playerId].hand.Add(GetCard());
-            return _newGame.players[playerId].hand.Last();
+            var play1 = GetPlayer(playerId);
+            play1.hand.Add(GetCard());
+            play1.handValue = _value.HandValue(play1.hand);
+            return play1.hand.Last();
         }
 
         public Player GetPlayer(int playerId)
@@ -121,13 +123,26 @@ namespace Blackjack.BLL
         public string HandValueLogic(int id)
         {
             var player = _newGame.players.Where(a => a.id == id).FirstOrDefault();
-
-            if (player.handValue == 21)
-                return "Black jack";
-            else if (player.handValue > 21)
-                return "bust";
+            if (player.id != _players-1)
+            {
+                if (player.handValue == 21)
+                    return "Black jack";
+                else if (player.handValue > 21)
+                    return "bust";
+                else
+                    return "keep playing";
+            }
             else
-                return "keep playing";
+            {
+                if (player.handValue == 21)
+                    return "Black jack";
+                else if (player.handValue >= 17)
+                    return "stop";
+                else if (player.handValue > 21)
+                    return "bust";
+                else
+                    return "keep playing";
+            }
         }
     }
 }

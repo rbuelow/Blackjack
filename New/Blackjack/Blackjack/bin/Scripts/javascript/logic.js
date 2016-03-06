@@ -1,18 +1,6 @@
-﻿var player = {
-    hand: obj
-};
-var dealer = {
-    hand: obj
-};
+﻿var playerCount;
+var dealer;
 
-var playerCount
-
-var playerCardValue;
-var dealerCardValue;
-var obj = $('#hit').data('deck')
-var cards = {
-    deck: obj
-}
 $('#start').click(function () {
     var isNumber = false;
     $('#start').hide();
@@ -20,91 +8,136 @@ $('#start').click(function () {
         playerCount = prompt("How many players?");
         if (parseInt(playerCount) != NaN) {
             var count = parseInt(playerCount);
-            StartGame(count);
-                isNumber = true
-                $('#game').show();
-        }
-    }
-    
-
-   
-})
-//$(function () {
-   // $(document).ready(Hit)
-    //for (var x = 0; x < 2; x++) {
-    //    BuildPlayerHand(cards);
-    //    BuildDealerHand(cards);
-    //};
-//});
-
-function StartGame(count) {
-    $.post("/api/Game/"+count);
-};
-
+            StartGameWebApi(count);
+            isNumber = true;
+            $('#game').show();
+        };
+    };
+});
 
 $('#deal').click(function () {
-    GetPlayerIds();
+    GetPlayerIdsWebApiCall();
+    dealer = $('#dealerGroup').children('ul');
     DealPlayerHands();
-    DealDealerHand()
+    DealDealerHand(dealer);
     $('#deal').hide();
-    //$('.cardDisplay').show();
-    //GetPlayerHand();
-    //GetDealerHand();
-    //GetPlayerValue(player);
-    //GetDealerValue(dealer);
-    //if (player.handValue == 21 && dealer.handValue == 21) {
-    //    alert("Its a push, both you and dealer have blackjack")
-    //}
-    //else if (dealer.handValue == 21) {
-    //    alert("The dealer wins. So sorry!")
-    //}
-    //else if (player.handValue == 21) {
-    //    alert("BlackJack!")
-    //    //$.get("/api/web"),function(data){
-    //    //}
-    //    return false;
-    //}
-    //else {
-    //    $('#deal').hide();
-    //    return false;
-    //}
     $(document).ready(Hit);
 });
 
 function Hit () {
     $('.hit').click(function () {
         var $log = $(this).parent()
-        $.post("api/card/" + $(this).parent().attr('id'), function (card) {
-            $log.append("<li class='cardDisplay'>" + card + "</li>")
-        });
-        //    if (obj == "") return false;
-        //    if (typeof (obj) == "string") {
-        //        obj = obj.split(",");
-        //    };   
-        //    $('#hit').remove();
-        //    $.ajax({
-        //        url: 'api/card',
-        //        type: 'post',
-        //        data: cards,
-        //        async: false,
-        //        success: function (gameModel) {
-        //            $(".player").append("<li  class=&#32;cardDisplay&#32;></li>")
-        //            $(".player li:last").append(gameModel.card);
-        //            var deck = gameModel.deck
-        //            var $log = $('#hitBtn'),
-        //                str = '<button id="hit" class="hit" data-deck=' + deck + '>Hit</button>',
-        //                html = $.parseHTML(str);
-        //            $log.append(html);
-        //            $(document).ready();
-        //        }
-        //    });
-        //    AddHand();
-        //    GetPlayerValue(player)
+        HitWebApiCall($log);
+        GetHandValueInfo($log);
+        if ($('.hit').length <= 0) {
+            var dealerValue = GetHandValueInfo(dealer);
+            ShowDealerHand(dealer);
+            while (dealerValue == "keep playing") {
+                DealerHit(dealer);
+                var newValue = GetHandValueInfo(dealer);
+                dealerValue = newValue;
+            }
+            if (dealerValue == "Black Jack") {
+                dealer.append("<h2>Black Jack!!</h2>");
+            }
+            else if (dealerValue == "stop") {
+                dealer.append("<h2>Dealer stops</h2>")
+            }
+            else 
+                dealer.append("<h2>Bust!<h2>");        
+        }
     });
 };
-function GetPlayerIds () {
+
+function DealPlayerHands() {
+    var playerList = $('#playerGroup');
+    $.each(playerList.children('ul'), function (key, value) {
+        var $log = $(this);
+        PlayerHandWebApiCall($log);
+        GetHandValueInfo($log);
+    });
+};
+
+function DealDealerHand(htmlTag) {
+    DealerHandWebApiCall(htmlTag)
+    GetHandValueInfo(htmlTag);
+};
+
+function ShowDealerHand(htmlTag) {
+    htmlTag.children('li').remove();
+    PlayerHandWebApiCall(htmlTag);
+    htmlTag.children('.hit').remove();
+}
+
+function GetHandValueInfo(htmlTag) {
+    var Vstring;
     $.ajax({
-        url: '/api/Card',
+        url: 'api/Card/' + htmlTag.attr('id'),
+        type: 'get',
+        async: false,
+        success: function (valueString) {
+            if (htmlTag.attr('id') == playerCount - 1) {
+                Vstring = valueString
+                return Vstring;
+            }        
+            if (valueString == "Black jack") {
+                htmlTag.children('.hit').remove();
+                htmlTag.append("<h2>Black Jack!!</h2>");
+                return valueString;
+            }
+            else if (valueString == "bust") {
+                htmlTag.append("<h2>Bust!<h2>");
+                htmlTag.children('.hit').remove();
+                return valueString;
+            }
+            else
+                return valueString;
+        }
+    });
+    return Vstring;
+};
+
+function DealerHit(htmlTag) {
+    HitWebApiCall(htmlTag);
+}
+
+//Web api calls
+function PlayerHandWebApiCall(htmlTag) {
+    $.ajax({
+        url: '/api/Player/' + htmlTag.attr('id'),
+        type: 'post',
+        async: false,
+        success: function (hand) {
+            htmlTag.append("<li class='cardDisplay'>" + hand[0] + "</li><li class='cardDisplay'>" + hand[1] + "</li> <button class='hit'>Hit</button>");
+        }
+    });
+}
+function HitWebApiCall(htmlTag) {
+    $.ajax({
+        url: "api/card/" + htmlTag.attr('id'),
+        type: 'post',
+        async: false,
+        success: function (card) {
+            htmlTag.append("<li class='cardDisplay'>" + card + "</li>");
+        }
+    });
+}
+function DealerHandWebApiCall(htmlTag) {
+    $.ajax({
+        url: '/api/Dealer/' + htmlTag.attr('id'),
+        type: 'get',
+        async: false,
+        success: function (dealerHand) {
+            htmlTag.append("<li class='cardDisplay'>" + dealerHand[0] + "</li><li class='cardDisplay'>" + dealerHand[1] + "</li>");
+        }
+    });
+}
+function StartGameWebApi(count) {
+    $.post("/api/Game/"+count);
+};
+function GetPlayerIdsWebApiCall() {
+    $.ajax({
+        url: '/api/Game',
         type: 'get',
         async: false,
         success: function (ids) {
@@ -112,100 +145,9 @@ function GetPlayerIds () {
                 $('#playerGroup').append("<h2 class='displayName'>Player</h2><ul class='player' id='" + i + "'></ul>");
             };
             $('#dealerGroup').append("<h2 class='displayName'>Dealer</h2><ul class='dealer' id='" + ids[ids.length - 1]+ "'></ul>");
-
         }
     });
 }
 
-function DealPlayerHands() {
-    var playerList = $('#playerGroup')
-    $.each(playerList.children('ul'), function (key, value) {
-        var $log = $(this);
-        $.ajax({
-            url: '/api/Player/' + $(this).attr('id'),
-            type: 'post',
-            async: false,
-            success: function (hand) {
-                $log.append("<li class='cardDisplay'>" + hand[0] + "</li><li class='cardDisplay'>" + hand[1] + "</li> <button class='hit'>Hit</button>");
-            }
-        });
-    });
-};
 
-function DealDealerHand() {
-    var dealer = $('#dealerGroup').children('ul')
-    $.ajax({
-        url: '/api/Dealer/' + dealer.attr('id'),
-        type: 'get',
-        async: false,
-        success: function (dealerHand) {
-            dealer.append("<li class='cardDisplay'>" + dealerHand[0] + "</li><li class='cardDisplay'>" + dealerHand[1] + "</li>")
-        }
-    });
-};
 
-function GetHandValueInfo() {
-
-}
-
-//function GetPlayerValue(obj) {    
-//    $.post("/api/Player", obj, function (gamePlayer) {
-//            playerCardValue = gamePlayer.handValue;
-//    });
-//}
-
-//function GetDealerValue(obj) {
-//    $.post("/api/Player", obj, function (gameDealer) {
-//            dealerCardValue = gameDealer.handValue;
-//    });
-//}
-
-//function AddHand() {
-//    var playerCard = $('.player li:last-child')
-//    var card = playerCard;
-//    player.hand += "," + card.text();
-//    player.hand = player.hand.split(',')
-//}
-//function GetPlayerHand() {
-//    var playerList = $('.player')
-//    $.each(playerList.children(), function (key, value) {
-//        var card = value
-//        if (player.hand == undefined) {
-//            player.hand = card.innerHTML + ",";
-//        }
-//        else {
-//            player.hand += card.innerHTML;
-//        }          
-//    });
-//    player.hand = player.hand.split(",")
-//}
-
-//function GetDealerHand() {
-//    var dealerList = $('.dealer')
-//    $.each(dealerList.children(), function (key, value) {
-//        var card = value
-//        if (dealer.hand == undefined) {
-//            dealer.hand = card.innerHTML + ",";
-//        }
-//        else {
-//            dealer.hand += card.innerHTML;
-//        }        
-//    });
-//    dealer.hand = dealer.hand.split(",")
-//}
-
-//function BuildPlayerHand(cards){
-//    $.post("/api/Card", cards, function (data) {
-//        $(".player").append("<li  class=&#32;cardDisplay&#32; style=&#32;display:none&#32;></li>")
-//        $(".player li:last").append(data.card);
-//        cards.deck = data.deck;
-//    });
-//}
-
-//function BuildDealerHand(cards) {
-//    $.post("/api/Card", cards, function (data) {
-//        $(".dealer").append("<li  class=&#32;cardDisplay&#32; style=&#32;display:none&#32;></li>")
-//        $(".dealer li:last").append(data.card);
-//        cards.deck = data.deck;
-//    });
-//}

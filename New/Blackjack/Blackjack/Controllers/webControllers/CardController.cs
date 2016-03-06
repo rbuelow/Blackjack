@@ -18,11 +18,12 @@ namespace Blackjack.Controllers.webControllers
         }
 
         //GET api/<controller>/
-
-        public List<int> Get()
-        {            
-            return newGame.GetPlayerIds();
+        [HttpGet]
+        public string Get(int id)
+        {
+            return newGame.HandValueLogic(id);
         }
+        
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)

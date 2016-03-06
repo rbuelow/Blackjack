@@ -18,5 +18,11 @@ namespace Blackjack.Controllers.webControllers
         {
             newGame.StartGame(id);
         }
+
+        [HttpGet]
+        public List<int> Get()
+        {
+            return newGame.GetPlayerIds();
+        }
     }
 }
