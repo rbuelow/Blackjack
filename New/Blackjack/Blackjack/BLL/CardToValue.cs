@@ -71,11 +71,18 @@ namespace Blackjack.BLL
         public int HandValue(List<string> hand)
         {
             int handValue = 0;
+            bool containsAce = false;
             foreach (var card in hand)
             {
+                if (card == "sA" || card == "cA" || card == "hA" || card == "dA")
+                    containsAce = true; 
                 int cardValue = compairCard(card);
                 handValue = handValue + cardValue;
             };
+            if(containsAce && handValue != 2)
+                handValue = handValue + 10;
+            if(containsAce && handValue > 21 && handValue-10 < 21) 
+                handValue = handValue - 10; 
             return handValue;
         }
 
