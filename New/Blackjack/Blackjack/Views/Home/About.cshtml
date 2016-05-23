@@ -1,7 +1,26 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿
+<!DOCTYPE >
 
-<p>Use this area to provide additional information.</p>
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Data Source=.\SQLEXPRESS;Initial Catalog=BlackJackDB;User Id=sa;Password=password"].ToString()))
+        {
+    debugger;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Players", cn);
+            cn.Open();
+            SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            rdr.Read();
+            Response.Write(rdr[0].ToString()); //read a value
+    debugger;
+        }
+    }
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SQL Authentication</title>
+</head>
+<body />
+</html>
+

@@ -1,4 +1,5 @@
 ﻿using Blackjack.BLL;
+using Blackjack.repo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,9 +90,10 @@ namespace Blackjack.Models
             storeDeck(stackDeck);
         }
 
+        Database addDeck = new Database();
         public void storeDeck(Stack<string> deck)
         {
-           GlobalDeck.deck = deck;
+            addDeck.postDeck(deck);
         }
     }
 }

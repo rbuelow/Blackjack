@@ -7,9 +7,10 @@ namespace Blackjack.Models
 {
     public class CardToValue
     {
+
         Dictionary<string, int> dictionary = new Dictionary<string, int>()
         {
-            { "hA" , 1},
+            { "hA" , 11},
             { "h2" , 2},
             { "h3" , 3},
             { "h4" , 4},
@@ -22,7 +23,7 @@ namespace Blackjack.Models
             { "hJ" , 10},
             { "hQ" , 10},
             { "hK" , 10},
-            { "dA" , 1},
+            { "dA" , 11},
             { "d2" , 2},
             { "d3" , 3},
             { "d4" , 4},
@@ -35,7 +36,7 @@ namespace Blackjack.Models
             { "dJ" , 10},
             { "dQ" , 10},
             { "dK" , 10},
-            { "cA" , 1},
+            { "cA" , 11},
             { "c2" , 2},
             { "c3" , 3},
             { "c4" , 4},
@@ -48,7 +49,7 @@ namespace Blackjack.Models
             { "cJ" , 10},
             { "cQ" , 10},
             { "cK" , 10},
-            { "sA" , 1},
+            { "sA" , 11},
             { "s2" , 2},
             { "s3" , 3},
             { "s4" , 4},
@@ -63,13 +64,23 @@ namespace Blackjack.Models
             { "sK" , 10},
         };
 
-        public int valueHand(List<string> hand)
+        public int valueHand(List<string> hand,int id)
         {
+            bool aceHighOrLow = false;
             int handValue = 0;
             foreach (var card in hand)
             {
                 int cardValue = compairCard(card);
                 handValue = handValue + cardValue;
+                if (cardValue == 1)
+                {
+                    aceHighOrLow = true;
+                }
+                if (aceHighOrLow && handValue > 21)
+                {
+                    handValue = handValue - 10;
+                    aceHighOrLow = false;
+                }
             };
             return handValue;
         }

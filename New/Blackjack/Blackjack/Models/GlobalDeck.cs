@@ -10,6 +10,5 @@ namespace Blackjack.BLL
     public class GlobalDeck
     {
         public static Stack<string> deck { get; set; }
-        public static List<Player> players {get; set;} 
     }
 }

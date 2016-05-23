@@ -1,6 +1,7 @@
 ﻿using Blackjack.BLL;
 using Blackjack.Models;
 using Blackjack.Models.ViewModels;
+using Blackjack.repo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,9 @@ namespace Blackjack.Controllers
 {
     public class HomeController : Controller
     {
+        Database data = new Database();
         public ActionResult Index()
         {
-            
-            CardToValue x = new CardToValue();
-
-            var y = x.valueHand(new List<string> { "h3", "d7" });
-            var q = 12;
             return View();
         }
 

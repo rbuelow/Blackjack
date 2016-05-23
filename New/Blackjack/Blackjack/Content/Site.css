@@ -1,13 +1,10 @@
 ﻿body {
+    background-color: green;
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -35,20 +32,21 @@ html{
     word-wrap: break-word;
 }
 .cardDisplay{
-	padding: 1rem 2rem;
-	margin: 1rem 1rem 1rem 0;
+    margin-right: 10px;
+    padding: 4rem 3rem;
+    background-color: white;
 	display: inline;
 	font-size: 2rem;
 	vertical-align: middle;
 	text-align: center;
-	width: 6rem;
-	height: 6rem;
 	border: 1px solid #000000;
+    border-radius: 10px;
 }
 .load{
 	margin: 5rem;
 }
 ul{
+    padding: 0;
 	list-style-type: none;
 }
 .dealer{
@@ -59,5 +57,15 @@ ul{
     text-decoration: none;
 }
 .displayName{
-	margin-left: 5rem;
+	margin-bottom: 5rem;
+}
+
+footer{
+    background-color: white;
+    height: 5rem;
+}
+
+.footer__hr{
+    border-top: 3px solid bisque;
+    border-bottom: 1px solid black;
 }
